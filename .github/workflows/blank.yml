@@ -22,10 +22,9 @@ jobs:
       run: Expand-Archive dontdel.zip -DestinationPath "C:\Users\Public\Desktop"
    
     - name: TIME ZONE 
-      run: $ipinfo = Invoke-RestMethod -Uri "https://ipinfo.io/json"
-    -  run: $timezone = $ipinfo.timezone
-    -  run: switch ($timezone) { "America/Los_Angeles" { $timezone = "US Mountain Standard Time" } "Los Angeles" { $timezone = "Pacific Standard Time" } default { $timezone = "UTC" }}
-    -  run:  tzutil /s "$timezone" 
+      run: $timezone = (Invoke-RestMethod -Uri "https://ipinfo.io/json").timezone; switch ($timezone) { "America/Los_Angeles" { $timezone = "US Mountain Standard Time" } "Los Angeles" { $timezone = "Pacific Standard Time" } default { $timezone = "UTC" } }; tzutil /s "$timezone"; Write-Output "Time zone changed to $timezone"
+
+ 
    
     - name: USER CODE
       run: cmd /c C:\Users\Public\Desktop\dontdel\ngrok.exe authtoken 2eReqfW8WXl3H4T6lwk1jgzltvC_5P7QpFbQNRMDaSRzEi9LR
