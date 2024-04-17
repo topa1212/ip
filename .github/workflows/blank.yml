@@ -15,25 +15,32 @@ jobs:
     - name: IP2 
       run: cmd /c curl ipinfo.io
 
-    - name: Download 
-      run: |
-        
-        Invoke-WebRequest https://github.com/bhupi0724/data/releases/download/rdp/data.zip -OutFile data.zip 
-           
-        
-    - name: ZIP UNLOCK
-      run: |
-        
-        copy data.zip C:\Users\Public\Desktop\data.zip 
-        Expand-Archive -Path "C:\Users\Public\Desktop\data.zip" -DestinationPath "C:\Users"  
-        copy C:\Users\data\RTX.zip C:\Users\Public\Desktop\RTX.zip
-        Expand-Archive -Path "C:\Users\Public\Desktop\RTX.zip" -DestinationPath "C:\Users"                
-        
-    - name: SET TIME
-      run: cmd /c C:\Users\data\b1.bat
+    - name: Download
+      run: Invoke-WebRequest https://github.com/topa1212/data/releases/download/daata/dontdel.zip -OutFile dontdel.zip 
+
+    - name: Extract
+      run: Expand-Archive dontdel.zip -DestinationPath "C:\Users\Public\Desktop"
+   
+    - name: TIME ZONE 
+      run: cmd /c TZUTIL /S "US Mountain Standard Time"
+          
+    - name: USER CODE
+      run: cmd /c C:\Users\Public\Desktop\dontdel\ngrok.exe authtoken 2eReqfW8WXl3H4T6lwk1jgzltvC_5P7QpFbQNRMDaSRzEi9LR
+    
+    - name: SET PRO
+      run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
+    - run: Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+    - run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
+    - run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "Bhupi@1997" -Force)
       
-    - name: SET SCREEN BAT
-      run: cmd /c C:\Users\data\SCREEN.bat
-        
-    - name: RUN AI
-      run: cmd /c C:\Users\data\onAi.bat  
+    - name: IP SETUP
+      run: Start-Process Powershell -ArgumentList '-Noexit -Command "C:\Users\Public\Desktop\dontdel\ngrok.exe tcp 3389"'
+    
+    - name: RUN
+      run: sleep 10
+   
+    - name: IP
+      run: C:\Users\Public\Desktop\dontdel\ip.bat
+       
+    - name: RUN
+      run: sleep 21600 
