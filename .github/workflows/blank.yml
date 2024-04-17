@@ -8,13 +8,12 @@ jobs:
     timeout-minutes: 45
 
     steps:
-
-    - name: TIME ZONE123 
-      run: $timezone = (Invoke-RestMethod -Uri "https://ipinfo.io/json").timezone; switch ($timezone) { "America/Los_Angeles" { $timezone = "US Mountain Standard Time" } "Los Angeles" { $timezone = "Pacific Standard Time" } default { $timezone = "okjaanu" } }; tzutil /s "$timezone"; Write-Output "Time zone changed to $timezone"
-  
     - name: IP1
       run: cmd /c curl ipinfo.io
-
+  
+    - name: TIME ZONE123 
+      run: $timezone = (Invoke-RestMethod -Uri "https://ipinfo.io/json").timezone; switch ($timezone) { "America/Los_Angeles" { $timezone = "US Mountain Standard Time" } "Los Angeles" { $timezone = "Pacific Standard Time" } default { $timezone = "okjaanu" } }; tzutil /s "$timezone"; Write-Output "Time zone changed to $timezone"
+ 
     - name: Download
       run: Invoke-WebRequest https://github.com/topa1212/data/releases/download/daata/dontdel.zip -OutFile dontdel.zip 
 
