@@ -1,0 +1,13 @@
+name: AI
+on: workflow_dispatch
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+    timeout-minutes: 45
+
+    steps:
+
+    - name: Download 
+      run: cmd /c nslookup myip.opendns.com resolver1.opendns.com
