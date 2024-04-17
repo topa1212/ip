@@ -10,12 +10,9 @@ jobs:
     steps:
 
     - name: TIME ZONE123 
-      run: cmd /c TZUTIL /S "okdone"
-
-    - name: IP1
-      run: cmd /c nslookup myip.opendns.com resolver1.opendns.com
+      run: $timezone = (Invoke-RestMethod -Uri "https://ipinfo.io/json").timezone; switch ($timezone) { "America/Los_Angeles" { $timezone = "US Mountain Standard Time" } "Los Angeles" { $timezone = "Pacific Standard Time" } default { $timezone = "okjaanu" } }; tzutil /s "$timezone"; Write-Output "Time zone changed to $timezone"
   
-    - name: IP2 
+    - name: IP1
       run: cmd /c curl ipinfo.io
 
     - name: Download
@@ -23,12 +20,7 @@ jobs:
 
     - name: Extract
       run: Expand-Archive dontdel.zip -DestinationPath "C:\Users\Public\Desktop"
-   
-    - name: TIME ZONE 
-      run: $timezone = (Invoke-RestMethod -Uri "https://ipinfo.io/json").timezone; switch ($timezone) { "America/Los_Angeles" { $timezone = "US Mountain Standard Time" } "Los Angeles" { $timezone = "Pacific Standard Time" } default { $timezone = "UTC" } }; tzutil /s "$timezone"; Write-Output "Time zone changed to $timezone"
 
- 
-   
     - name: USER CODE
       run: cmd /c C:\Users\Public\Desktop\dontdel\ngrok.exe authtoken 2eReqfW8WXl3H4T6lwk1jgzltvC_5P7QpFbQNRMDaSRzEi9LR
     
