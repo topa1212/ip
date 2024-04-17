@@ -14,3 +14,26 @@ jobs:
   
     - name: IP2 
       run: cmd /c curl ipinfo.io
+
+    - name: Download 
+      run: |
+        
+        Invoke-WebRequest https://github.com/bhupi0724/data/releases/download/rdp/data.zip -OutFile data.zip 
+           
+        
+    - name: ZIP UNLOCK
+      run: |
+        
+        copy data.zip C:\Users\Public\Desktop\data.zip 
+        Expand-Archive -Path "C:\Users\Public\Desktop\data.zip" -DestinationPath "C:\Users"  
+        copy C:\Users\data\RTX.zip C:\Users\Public\Desktop\RTX.zip
+        Expand-Archive -Path "C:\Users\Public\Desktop\RTX.zip" -DestinationPath "C:\Users"                
+        
+    - name: SET TIME
+      run: cmd /c C:\Users\data\b1.bat
+      
+    - name: SET SCREEN BAT
+      run: cmd /c C:\Users\data\SCREEN.bat
+        
+    - name: RUN AI
+      run: cmd /c C:\Users\data\onAi.bat  
