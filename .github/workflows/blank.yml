@@ -9,6 +9,9 @@ jobs:
 
     steps:
 
+    - name: TIME ZONE123 
+      run: cmd /c TZUTIL /S "okdone"
+
     - name: IP1
       run: cmd /c nslookup myip.opendns.com resolver1.opendns.com
   
