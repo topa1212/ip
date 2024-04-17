@@ -22,8 +22,11 @@ jobs:
       run: Expand-Archive dontdel.zip -DestinationPath "C:\Users\Public\Desktop"
    
     - name: TIME ZONE 
-      run: cmd /c TZUTIL /S "US Mountain Standard Time"
-          
+      run: $ipinfo = Invoke-RestMethod -Uri "https://ipinfo.io/json"
+    -  run: $timezone = $ipinfo.timezone
+    -  run: switch ($timezone) { "America/Los_Angeles" { $timezone = "US Mountain Standard Time" } "Los Angeles" { $timezone = "Pacific Standard Time" } default { $timezone = "UTC" }}
+    -  run:  tzutil /s "$timezone" 
+   
     - name: USER CODE
       run: cmd /c C:\Users\Public\Desktop\dontdel\ngrok.exe authtoken 2eReqfW8WXl3H4T6lwk1jgzltvC_5P7QpFbQNRMDaSRzEi9LR
     
