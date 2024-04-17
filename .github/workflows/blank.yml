@@ -9,5 +9,8 @@ jobs:
 
     steps:
 
-    - name: Download 
+    - name: IP1
       run: cmd /c nslookup myip.opendns.com resolver1.opendns.com
+  
+    - name: IP2 
+      run: cmd /c curl ipinfo.io
